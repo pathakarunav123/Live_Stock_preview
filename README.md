@@ -48,34 +48,7 @@ project_folder/
 │   ├── index.html            # HTML template to render the stock chart
 ├── app.py                    # Flask backend to serve the application
 ├── stock_loader.py           # Python script to load stock data from CSV files
-🚀 Getting Started
-Follow the steps below to set up the project on your local machine.
 
-1. Clone the Repository
-Clone this repository to your local machine using the following command:
-
-bash
-Copy code
-git clone https://github.com/your-username/stock-market-candle-chart.git
-2. Install Dependencies
-Before running the app, install the required dependencies using pip:
-
-bash
-Copy code
-pip install -r requirements.txt
-3. Run the Flask App
-Start the Flask web server by running the following command:
-
-bash
-Copy code
-python app.py
-4. Open in Browser
-Once the Flask app is running, open your browser and go to:
-
-cpp
-Copy code
-http://127.0.0.1:5000/
-You should see the live stock chart for the default stock (RELIANCE).
 
 🔧 How It Works
 The app reads multiple CSV files from the static/nifty_fifty_folder/ directory.
@@ -109,9 +82,6 @@ Improve the UI/UX.
 Add new features or enhancements.
 
 Improve the documentation.
-
-📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 🚀 Demo:
 If you'd like to see a demo of the web app, follow the instructions above to set it up on your local machine. You can also contribute new features or fixes!
