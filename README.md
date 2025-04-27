@@ -2,12 +2,13 @@
 
 
 
-🚀 Stock Market Candle Chart Web App
+<h1>🚀 Stock Market Candle Chart Web App</h1>
+
 This is a Flask web application that allows users to view live stock market candlestick charts for various stocks in the Nifty 50 index. The project dynamically loads historical stock data from multiple CSV files and generates interactive candlestick charts using the mplfinance library.
 
 The web application serves the charts using Flask, and users can easily view and interact with the data on a beautifully styled web interface.
 
-📈 Features
+<h2>📈 Features</h2>
 Interactive Candlestick Charts: View detailed candlestick charts for different Nifty 50 stocks (e.g., RELIANCE, INFY, TCS).
 
 Historical Data: The app loads stock data from multiple CSV files, which contain historical price data for each stock.
@@ -18,10 +19,10 @@ mplfinance Library: Utilizes mplfinance to generate interactive and high-quality
 
 Base64 Encoding: The generated charts are encoded in Base64 format and directly embedded into the web page for fast rendering without needing to save images to disk.
 
-🛠 Technologies Used
+<h2>🛠 Technologies Used</h2>
 Python:
 
-Flask (for the web server)
+<bold>Flask</bold> (for the web server)
 
 Pandas (for data handling)
 
