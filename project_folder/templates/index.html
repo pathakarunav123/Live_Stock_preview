@@ -1,0 +1,34 @@
+<!-- templates/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stock Chart Viewer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📈 Stock Chart Viewer</h1>
+
+        <form method="POST" class="form">
+            <input type="text" name="stock_name" placeholder="Enter Stock Name (e.g., RELIANCE)" required>
+            <button type="submit">View Chart</button>
+        </form>
+
+        {% if chart_filename %}
+            <div class="chart-section">
+                <h2>{{ stock_name }} Stock Chart</h2>
+                <img src="{{ url_for('static', filename=chart_filename) }}" alt="Stock Chart">
+            </div>
+        {% elif stock_name %}
+            <p class="error">⚠️ No data found for "{{ stock_name }}".</p>
+        {% endif %}
+    </div>
+
+    <footer>
+        Made with ❤️ by Arunav Pathak
+    </footer>
+</body>
+</html>
+
