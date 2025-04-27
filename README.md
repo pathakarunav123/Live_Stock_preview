@@ -38,7 +38,7 @@ GitHub:
 
 Version control and repository hosting
 
-📂 Project Structure
+<h2>📂 Project Structure</h2>
 graphql
 Copy code
 project_folder/
@@ -51,7 +51,7 @@ project_folder/
 ├── stock_loader.py           # Python script to load stock data from CSV files
 
 
-🔧 How It Works
+<h2>🔧 How It Works</h2>
 The app reads multiple CSV files from the static/nifty_fifty_folder/ directory.
 
 Each CSV file contains stock data, including dates and stock prices for different companies in the Nifty 50 index.
@@ -62,7 +62,7 @@ The generated chart is returned as a Base64 image and displayed in the user's br
 
 You can easily extend the app to allow users to select different stocks dynamically or add more features, such as live data fetching.
 
-🚧 Future Improvements
+<h2>🚧 Future Improvements</h2>
 Stock Selection: Add a dropdown menu to let users select different stocks from the Nifty 50 index.
 
 Live Data: Integrate with APIs (e.g., Yahoo Finance or Alpha Vantage) to fetch live stock data instead of relying on static CSV files.
@@ -73,7 +73,7 @@ Chart Customization: Allow users to adjust chart parameters like time range, cha
 
 Performance Enhancements: Implement caching or data pre-fetching to speed up loading times for large datasets.
 
-💡 Contributing
+<h2>💡 Contributing</h2>
 Feel free to contribute to this project! You can:
 
 Submit bug reports or feature requests.
@@ -84,7 +84,7 @@ Add new features or enhancements.
 
 Improve the documentation.
 
-🚀 Demo:
+<h2>🚀 Demo:</h2>
 If you'd like to see a demo of the web app, follow the instructions above to set it up on your local machine. You can also contribute new features or fixes!
 
 🙌 Happy Coding!
