@@ -87,4 +87,4 @@ Improve the documentation.
 <h2>🚀 Demo:</h2>
 If you'd like to see a demo of the web app, follow the instructions above to set it up on your local machine. You can also contribute new features or fixes!
 
-🙌 Happy Coding!
+<h1><b>🙌 Happy Coding!</b></h1>
