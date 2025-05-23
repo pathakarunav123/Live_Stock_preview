@@ -1,34 +1,151 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
-    <meta charset="UTF-8">
-    <title>Stock Chart Viewer</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>📈 Stock Chart Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {},
+            }
+        }
+    </script>
+    <link href="/project_folder/static/style.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+        /* Remove the body font-family from here - it's in the CSS file */
+        #themeToggle {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <h1>📈 Stock Chart Viewer</h1>
+<body class="min-h-screen bg-gray-50 flex flex-col dark:bg-gray-900 dark:text-gray-300 transition-colors duration-300">
+    <!-- Dark Mode Toggle Button -->
+    <button id="themeToggle" 
+            class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-3 py-1 rounded-lg shadow-md focus:outline-none">
+        🌙 Dark Mode
+    </button>
 
-        <form method="POST" class="form">
-            <input type="text" name="stock_name" placeholder="Enter Stock Name (e.g., RELIANCE)" required>
-            <button type="submit">View Chart</button>
-        </form>
+    <div class="container mx-auto px-4 py-8 flex-grow">
+        <div class="max-w-3xl mx-auto">
+            <header class="text-center mb-8">
+                <h1 class="text-3xl font-bold mb-2">📈 Stock Chart Viewer</h1>
+                <p class="text-gray-600 dark:text-gray-400">Visualize stock market data with interactive charts</p>
+            </header>
 
-        {% if chart_filename %}
-            <div class="chart-section">
-                <h2>{{ stock_name }} Stock Chart</h2>
-                <img src="{{ url_for('static', filename=chart_filename) }}" alt="Stock Chart">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 mb-8 transition-colors duration-300">
+                <form method="POST" class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex-grow">
+                        <input 
+                            type="text" 
+                            name="stock_name" 
+                            value="{{ stock_name if stock_name else '' }}"
+                            placeholder="Enter Stock Name (e.g., RELIANCE)" 
+                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                            required
+                        >
+                    </div>
+                    <button 
+                        type="submit" 
+                        class="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                        View Chart
+                    </button>
+                </form>
             </div>
-        {% elif stock_name %}
-            <p class="error">⚠️ No data found for "{{ stock_name }}".</p>
-        {% endif %}
+
+            {% if chart_filename %}
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md p-6 transition-colors duration-300">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-semibold">{{ stock_name }} Stock Chart</h2>
+                    <a 
+                        href="{{ url_for('static', filename=chart_filename) }}" 
+                        download="{{ stock_name }}_chart.svg"
+                        class="px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md hover:bg-green-700 transition-colors"
+                    >
+                        Download Chart
+                    </a>
+                </div>
+               <div class="border border-gray-200 dark:border-gray-600 rounded-lg p-4 relative">
+    <!-- Loading spinner -->
+    <div id="loadingSpinner" class="spinner"></div>
+
+    <img 
+        id="stockChartImage"
+        src="{{ url_for('static', filename=chart_filename) }}" 
+        alt="{{ stock_name }} stock price chart" 
+        class="w-full hidden"  <!-- hide initially -->
+</div>
+
+            </div>
+            {% elif stock_name %}
+            <div class="bg-red-50 dark:bg-red-900 border-l-4 border-red-500 text-red-700 dark:text-red-300 p-4 rounded-lg transition-colors duration-300" role="alert">
+                <p class="font-medium">⚠️ No data found for "{{ stock_name }}"</p>
+                <p class="text-sm mt-1">Please try another stock symbol</p>
+            </div>
+            {% endif %}
+        </div>
     </div>
 
-    <footer>
+    <footer class="bg-white dark:bg-gray-800 py-4 text-center text-gray-600 dark:text-gray-400 text-sm border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
         Made with ❤️ by Arunav Pathak
     </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        
+     
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+      
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        if (initialTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            themeToggle.textContent = '☀️ Light Mode';
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggle.textContent = '🌙 Dark Mode';
+        }
+        
+   
+        themeToggle.addEventListener('click', function() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙 Dark Mode';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️ Light Mode';
+            }
+        });
+        
+        
+        const img = document.getElementById('stockChartImage');
+        const spinner = document.getElementById('loadingSpinner');
+        
+        if (img && spinner) {
+            img.addEventListener('load', () => {
+                spinner.style.display = 'none';
+                img.classList.remove('hidden');
+            });
+            
+            if (img.complete && img.naturalHeight !== 0) {
+                spinner.style.display = 'none';
+                img.classList.remove('hidden');
+            }
+        }
+    });
+</script>
 </body>
 </html>
 
